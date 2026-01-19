@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy Birthday 💖</title>
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background:
+      linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+      url("bg.jpeg") center/cover no-repeat fixed;
+    color: white;
+    text-align: center;
+    overflow-x: hidden;
+}
+
+/* Heading */
+h1 {
+    margin-top: 30px;
+    font-size: 3em;
+}
+
+/* Card */
+.card {
+    background: rgba(255,255,255,0.15);
+    margin: 30px auto;
+    padding: 20px;
+    width: 90%;
+    max-width: 360px;
+    border-radius: 20px;
+    backdrop-filter: blur(6px);
+}
+
+/* Slideshow */
+.slideshow {
+    width: 380px;
+    height: 650px;
+    margin: auto;
+    border-radius: 20px;
+    overflow: hidden;
+}
+.slideshow img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+/* Buttons */
+button {
+    padding: 12px 22px;
+    margin: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 30px;
+    background: gold;
+    cursor: pointer;
+}
+
+/* Wish popup */
+#wishBox {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.8);
+    justify-content: center;
+    align-items: center;
+}
+#wishContent {
+    background: white;
+    color: black;
+    padding: 25px;
+    border-radius: 20px;
+    width: 80%;
+    max-width: 300px;
+}
+#wishContent textarea {
+    width: 100%;
+    height: 80px;
+}
+
+/* Balloons */
+.balloon {
+    position: fixed;
+    bottom: -120px;
+    font-size: 40px;
+    animation: floatUp linear infinite;
+}
+@keyframes floatUp {
+    from { transform: translateY(0); }
+    to   { transform: translateY(-120vh); }
+}
+</style>
+</head>
+
+<body>
+
+<h1>🎉 Happy Birthday My Moti 🎉</h1>"Happy birthday to the girl who stole my heart and makes every day brighter," "You're my sunshine and my best friend," or "Every moment with you is a gift, and I can't wait to celebrate you!".</h2> 
+
+<div class="card">
+    <div class="slideshow">
+        <img id="slide" src="photo1.jpeg">
+    </div>
+
+    <br>
+    <button onclick="playMusic()">🎵 Music</button>
+    <button onclick="openWish()">💌 Special Wish</button>
+
+    <h3 id="showWish"></h3>
+</div>
+
+<!-- Wish Popup -->
+<div id="wishBox">
+  <div id="wishContent">
+    <h3>Write your wish 💖</h3>
+    <textarea id="wishText"></textarea><br><br>
+    <button onclick="saveWish()">Save</button>
+    <button onclick="closeWish()">Close</button>
+  </div>
+</div>
+
+<audio id="music" src="music.mp3"></audio>
+
+<script>
+/* Slideshow */
+let photos = ["photo1.jpeg","photo2.jpeg","photo3.jpeg","photo4.jpeg","photo5.jpeg","photo6.jpeg","photo7.jpeg","photo8.jpeg"];
+let i = 0;
+setInterval(() => {
+  i = (i + 1) % photos.length;
+  document.getElementById("slide").src = photos[i];
+}, 2500);
+
+/* Music */
+function playMusic(){
+  document.getElementById("music").play();
+}
+
+/* Wish */
+function openWish(){
+  document.getElementById("wishBox").style.display = "flex";
+}
+function closeWish(){
+  document.getElementById("wishBox").style.display = "none";
+}
+function saveWish(){
+  let w = document.getElementById("wishText").value;
+  if(w){
+    document.getElementById("showWish").innerText = "💝 " + w;
+    closeWish();
+  }
+}
+
+/* Balloons */
+setInterval(() => {
+  let b = document.createElement("div");
+  b.className = "balloon";
+  b.innerText = "🎈";
+  b.style.left = Math.random()*100 + "vw";
+  b.style.animationDuration = (5 + Math.random()*5) + "s";
+  document.body.appendChild(b);
+  setTimeout(()=>b.remove(),10000);
+}, 700);
+</script>
+
+</body>
+</html>
